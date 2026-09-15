@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Cookwise design tokens
+ * Derived from the reference mockups: deep green primary, off-white ground,
+ * white cards with hairline borders, soft green tint for positive chips,
+ * warm orange for alerts/expiry. Mobile-first, max content width 430px.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --surface-2: #f2f4f0;
+  --border: #e6e9e3;
+  --text: #17201a;
+  --text-2: #5b665e;
+  --text-3: #8a948c;
+
+  --green-900: #143f2b;
+  --green-800: #1a5236;
+  --green-700: #1f6b45; /* primary */
+  --green-600: #2a8656;
+  --green-500: #3aa66a;
+  --green-100: #e3f2e8;
+  --green-50: #eef7f1;
+
+  --orange-600: #e1622f;
+  --orange-500: #f37a3b;
+  --orange-100: #fdece3;
+  --orange-50: #fff4ec;
+
+  --amber-600: #c98a12;
+  --amber-100: #fdf3d8;
+
+  --red-600: #d63b3b;
+  --red-100: #fde4e4;
+
+  --blue-600: #2f6fd6;
+  --blue-100: #e4edfb;
+
+  --primary: var(--green-700);
+  --primary-strong: var(--green-800);
+  --primary-soft: var(--green-100);
+  --primary-fg: #ffffff;
+
+  --shadow-card: 0 1px 2px rgba(20, 40, 28, 0.04), 0 4px 16px rgba(20, 40, 28, 0.05);
+  --shadow-raised: 0 8px 24px rgba(20, 40, 28, 0.12);
+
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  --nav-height: 68px;
+  --app-max-width: 430px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --color-green-900: var(--green-900);
+  --color-green-800: var(--green-800);
+  --color-green-700: var(--green-700);
+  --color-green-600: var(--green-600);
+  --color-green-500: var(--green-500);
+  --color-green-100: var(--green-100);
+  --color-green-50: var(--green-50);
+
+  --color-orange-600: var(--orange-600);
+  --color-orange-500: var(--orange-500);
+  --color-orange-100: var(--orange-100);
+  --color-orange-50: var(--orange-50);
+
+  --color-amber-600: var(--amber-600);
+  --color-amber-100: var(--amber-100);
+  --color-red-600: var(--red-600);
+  --color-red-100: var(--red-100);
+  --color-blue-600: var(--blue-600);
+  --color-blue-100: var(--blue-100);
+
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-fg: var(--primary-fg);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-lg);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* Phone frame: full-bleed on mobile, centred column on larger screens. */
+.app-shell {
+  min-height: 100dvh;
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin-inline: auto;
+  background: var(--bg);
+  position: relative;
+}
+
+@media (min-width: 480px) {
+  body {
+    background: #e9ece6;
+  }
+  .app-shell {
+    box-shadow: 0 0 0 1px var(--border), 0 20px 60px rgba(20, 40, 28, 0.12);
+  }
+}
+
+/* Page content sits above the bottom nav. */
+.page {
+  padding: 12px 16px calc(var(--nav-height) + 24px + env(safe-area-inset-bottom));
+}
+.page--no-nav {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+/* Hide scrollbars on horizontal chip rows. */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hairline progress track. */
+.track {
+  background: var(--surface-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+/* Reduce motion for users who ask. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes cw-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: cw-fade-up 220ms ease-out both;
+}
+
+@keyframes cw-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 0%,
+    #e9ece6 40%,
+    var(--surface-2) 80%
+  );
+  background-size: 200% 100%;
+  animation: cw-shimmer 1.6s linear infinite;
+}
+
+@keyframes cw-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.pulse {
+  animation: cw-pulse 1.4s ease-in-out infinite;
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Cookwise">
+  <title>Cookwise</title>
+  <defs>
+    <!-- The leaf: the lens where two circles of r=206 overlap. -->
+    <path id="cw-leaf" d="M138.8 373.2 A206 206 0 0 1 373.2 138.8 A206 206 0 0 1 138.8 373.2 Z" />
+    <clipPath id="cw-leaf-clip">
+      <use href="#cw-leaf" />
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" rx="113" ry="113" fill="#1f6b45" />
+  <use href="#cw-leaf" fill="#ffffff" />
+  <!-- Midrib, clipped so it never spills past the tips. -->
+  <g clip-path="url(#cw-leaf-clip)">
+    <line x1="120" y1="392" x2="392" y2="120" stroke="#1f6b45" stroke-width="20" />
+  </g>
+</svg>
